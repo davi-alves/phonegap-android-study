@@ -1,0 +1,27 @@
+{
+  "name": "phonegap-android-study",
+  "main": "app.js",
+  "version": "1.0.0",
+  "authors": [
+    "Davi Alves <flyingkrai@hotmail.com>"
+  ],
+  "description": "aplicativo para estudos usando phonegap, angular.js, node.js, express e mongodb.",
+  "keywords": [
+    "phonegap",
+    "angular.js",
+    "node.js",
+    "express",
+    "mongodb"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-latest": "~1.2.1"
+  }
+}
