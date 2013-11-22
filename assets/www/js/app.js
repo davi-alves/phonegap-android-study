@@ -16,6 +16,11 @@ angular.module('myApp', [
         templateUrl: 'partials/employee-list.html',
         controller: 'EmployeeListCtrl'
       });
+      // employee details
+      $routeProvider.when('/employees/:employeeId', {
+        templateUrl: 'partials/employee-details.html',
+        controller: 'EmployeeDetailCtrl'
+      });
 
       $routeProvider.otherwise({
         redirectTo: '/employees'

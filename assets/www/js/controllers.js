@@ -31,6 +31,22 @@ angular.module('myApp.controllers', [])
 // EMPLOYEE LIST CTRL
 .controller('EmployeeListCtrl', ['$scope', '$routeParams', 'Employee',
     function ($scope, $routeParams, Employee) {
+    $scope.query = '';
     // query employees
-    $scope.employees = Employee.query();
+    var employees = Employee.query();
+    for (var i = employees.length - 1; i >= 0; i--) {
+      employees[i].fullName = employees[i].firstName + ' ' + employees[i].lastName;
+    }
+
+    $scope.employees = employees;
+    window.$scope = $scope;
+}])
+
+// EMPLOYEE DETAIL CTRL
+.controller('EmployeeDetailCtrl', ['$scope', '$routeParams', 'Employee',
+    function ($scope, $routeParams, Employee) {
+    // get employee by id
+    $scope.employee = Employee.get({
+      employeeId: $routeParams.employeeId
+    });
 }]);

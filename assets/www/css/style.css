@@ -12,9 +12,12 @@
     left: 0px;
     right: 0px;
 }
+.details .scroller {
+    top: 168px;
+}
 
 .topcoat-icon--back {
-    background: url("img/back_light.svg") no-repeat;
+    background: url("img/back.svg") no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -116,7 +119,9 @@ a {
 }
 
 .list li:active {
-    background-color: #d6d6d6;
+    background-color: #404141;
+    -webkit-box-shadow: inset 0 1px rgba(0,0,0,0.18);
+    box-shadow: inset 0 1px rgba(0,0,0,0.18);
 }
 
 .actions > li > a {
@@ -187,7 +192,7 @@ ul {
 }
 
 .chevron {
-    background: transparent url(img/next_blue.svg);
+    background: transparent url(img/next.svg);
     background-repeat: no-repeat;
     background-size: contain;
     width: 20px;
@@ -197,4 +202,60 @@ ul {
     top: 22px;
     height: 50px;
     width: 28px;
+}
+
+.slide-left.ng-enter, .slide-left.ng-leave, .slide-right.ng-enter, .slide-right.ng-leave {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    -ms-transition: .40s ease-in-out;
+    -webkit-transition: .40s ease-in-out;
+    transition: .40s ease-in-out;
+}
+
+.slide-left.ng-enter {
+    z-index: 101;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.slide-left.ng-enter.ng-enter-active {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.slide-left.ng-leave {
+    z-index: 100;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.slide-left.ng-leave.ng-leave-active {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.slide-right.ng-enter {
+    z-index: 100;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+.slide-right.ng-enter.ng-enter-active {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.slide-right.ng-leave {
+    z-index: 101;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.slide-right.ng-leave.ng-leave-active {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
 }

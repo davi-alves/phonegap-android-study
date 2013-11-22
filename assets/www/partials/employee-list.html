@@ -1,20 +1,20 @@
 <div class="topcoat-navigation-bar">
-	<div class="topcoat-navigation-bar__item center full">
-		<h1 class="topcoat-navigation-bar__title">Employee Directory</h1>
-	</div>
+  <div class="topcoat-navigation-bar__item center full">
+    <h1 class="topcoat-navigation-bar__title">Employee Directory</h1>
+  </div>
 </div>
 <div class="search-bar">
-	<input type="search" ng-model="query" placeholder="Search" class="topcoat-search-input search-key">
+  <input type="search" ng-model="query" placeholder="Search" class="topcoat-search-input search-key">
 </div>
 <div class="topcoat-list__container scroller">
-	<ul class="topcoat-list list">
-		<li class="topcoat-list__item" ng-repeat="employee in employees | filter:query | orderBy:orderProp">
-			<a ng-click="go('/employees/' + employee.id)">
-				<img ng-src="pics/{{ employee.pic }}" alt="">
-				<p>{{ employee.firstName }} {{ employee.lastName }}</p>
-				<p>{{ employee.title }}</p>
-				<span class="chevron"></span><span class="count">{{ employee.reports }}</span>
-			</a>
-		</li>
-	</ul>
+  <ul class="topcoat-list list">
+    <li class="topcoat-list__item" ng-repeat="employee in employees | filter: {fullName:query}| orderBy:'reports':true">
+      <a ng-click="go('/employees/' + employee.id)">
+        <img ng-src="pics/{{ employee.pic }}" alt="">
+        <p>{{ employee.firstName }} {{ employee.lastName }}</p>
+        <p>{{ employee.title }}</p>
+        <span class="chevron"></span>
+      </a>
+    </li>
+  </ul>
 </div>
