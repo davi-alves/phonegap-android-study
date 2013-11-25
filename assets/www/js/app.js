@@ -6,7 +6,8 @@ angular.module('myApp', [
   'ngRoute',
   'ngAnimate',
   'myApp.controllers',
-  'myApp.restServices'
+  // 'myApp.restServices'
+  'myApp.memoryServices'
 
 ])
   .config(['$routeProvider',

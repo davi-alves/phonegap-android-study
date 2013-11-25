@@ -4,33 +4,60 @@ angular.module('myApp.controllers', [])
 // MAIN CTRL
 .controller('MainCtrl', ['$scope', '$rootScope', '$window', '$location',
     function ($scope, $rootScope, $window, $location) {
-    // init transition object class
-    $scope.slide = '';
+    // init
+    var back, go, exitApp, exitInterval;
 
     /**
      * Send the user back usign $window.history and css3 transitions
      *
      * @see $window
      */
-    $rootScope.back = function () {
+    back = function () {
       $scope.slide = 'slide-right';
       $window.history.back();
-    }
+    };
 
     /**
      * Go to designed location path
      *
      * @param  {string} path
      */
-    $rootScope.go = function (path) {
+    go =  function (path) {
       $scope.slide = 'slide-left';
       $location.url(path);
+    };
+
+    exitApp = function () {
+        if (exitInterval) {
+            return navigator.app.exitApp();
+        }
+
+        exitInterval = setTimeout(function () {
+            clearTimeout(exitInterval);
+            exitInterval = null;
+        }, 4000);
+
     }
+
+    // mobile back button event
+    $window.document.addEventListener("backbutton", function () {
+      var backButton = window.document.querySelector('.back-button');
+      if (!backButton) {
+        return exitApp();
+      }
+
+      backButton.click();
+    }, true);
+
+    // init scope variables
+    $scope.slide = '';
+    $rootScope.back = back;
+    $rootScope.go = go;
 
 }])
 // EMPLOYEE LIST CTRL
-.controller('EmployeeListCtrl', ['$scope', '$routeParams', 'Employee',
-    function ($scope, $routeParams, Employee) {
+.controller('EmployeeListCtrl', ['$scope', 'Employee',
+    function ($scope, Employee) {
     $scope.query = '';
     // query employees
     var employees = Employee.query();
