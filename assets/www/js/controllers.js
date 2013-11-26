@@ -3,7 +3,7 @@
 angular.module('myApp.controllers', [])
 // MAIN CTRL
 .controller('MainCtrl', ['$scope', '$rootScope', '$window', '$location',
-    function ($scope, $rootScope, $window, $location) {
+    function($scope, $rootScope, $window, $location) {
     // init
     var back, go, exitApp, exitInterval;
 
@@ -12,9 +12,12 @@ angular.module('myApp.controllers', [])
      *
      * @see $window
      */
-    back = function () {
+    back = function() {
       $scope.slide = 'slide-right';
       $window.history.back();
+      if (!$scope.$$phase) {
+        $scope.$apply();
+      }
     };
 
     /**
@@ -22,31 +25,29 @@ angular.module('myApp.controllers', [])
      *
      * @param  {string} path
      */
-    go =  function (path) {
+    go = function(path) {
       $scope.slide = 'slide-left';
       $location.url(path);
     };
 
-    exitApp = function () {
-        if (exitInterval) {
-            return navigator.app.exitApp();
-        }
+    exitApp = function() {
+      if (exitInterval) {
+        return navigator.app.exitApp();
+      }
 
-        exitInterval = setTimeout(function () {
-            clearTimeout(exitInterval);
-            exitInterval = null;
-        }, 4000);
+      exitInterval = setTimeout(function() {
+        clearTimeout(exitInterval);
+        exitInterval = null;
+      }, 4000);
 
     }
 
     // mobile back button event
-    $window.document.addEventListener("backbutton", function () {
-      var backButton = window.document.querySelector('.back-button');
-      if (!backButton) {
-        return exitApp();
+    $window.document.addEventListener("backbutton", function() {
+      var controller = document.querySelector('[ng-controller=MainCtrl]');
+      if (controller) {
+        angular.element(controller).scope().back();
       }
-
-      backButton.click();
     }, true);
 
     // init scope variables
@@ -57,7 +58,7 @@ angular.module('myApp.controllers', [])
 }])
 // EMPLOYEE LIST CTRL
 .controller('EmployeeListCtrl', ['$scope', 'Employee',
-    function ($scope, Employee) {
+    function($scope, Employee) {
     $scope.query = '';
     // query employees
     var employees = Employee.query();
@@ -71,7 +72,7 @@ angular.module('myApp.controllers', [])
 
 // EMPLOYEE DETAIL CTRL
 .controller('EmployeeDetailCtrl', ['$scope', '$routeParams', 'Employee',
-    function ($scope, $routeParams, Employee) {
+    function($scope, $routeParams, Employee) {
     // get employee by id
     $scope.employee = Employee.get({
       employeeId: $routeParams.employeeId
